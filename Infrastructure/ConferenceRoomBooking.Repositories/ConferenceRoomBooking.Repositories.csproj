@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="GetData\" />
+    <Folder Include="SetData\" />
+  </ItemGroup>
+
 </Project>

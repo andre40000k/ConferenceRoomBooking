@@ -1,3 +1,5 @@
+using ConferenceRoomBooking.Api.Moduls;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScrutor();
+builder.Services.AddConectDb(builder.Configuration);
 
 var app = builder.Build();
 

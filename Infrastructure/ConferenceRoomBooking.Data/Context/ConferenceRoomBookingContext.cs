@@ -4,21 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConferenceRoomBooking.Data.Context
 {
-    public class ConferenceRoomBookingContext : DbContext, IReadConferenceRoomBookingContext, IWriteConferenceRoomBookingContext
+    public class ConferenceRoomBookingContext : DbContext, IConferenceRoomBookingContext
     {
         public ConferenceRoomBookingContext(DbContextOptions<ConferenceRoomBookingContext> options):base(options) { }
 
-        public DbSet<Booking> Bookings => Set<Booking>();
+        public DbSet<Booking> Bookings {  get; set; }
 
-        public DbSet<ConferenceRoom> ConferenceRooms => Set<ConferenceRoom>();
+        public DbSet<ConferenceRoom> ConferenceRooms { get; set; }
 
-        public DbSet<Service> Services => Set<Service>();
-
-        IQueryable<Booking> IReadConferenceRoomBookingContext.Bookings => Bookings;
-
-        IQueryable<ConferenceRoom> IReadConferenceRoomBookingContext.ConferenceRooms => ConferenceRooms;
-
-        IQueryable<Service> IReadConferenceRoomBookingContext.Services => Services;
+        public DbSet<Service> Services { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,7 +20,9 @@ namespace ConferenceRoomBooking.Data.Context
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ConferenceRoomBookingContext).Assembly);
         }
 
-        Task<int> IWriteConferenceRoomBookingContext.SaveChangesAsync(CancellationToken ct)
-        => SaveChangesAsync(ct);
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

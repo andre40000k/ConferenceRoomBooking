@@ -9,8 +9,8 @@ namespace ConferenceRoomBooking.Domain.Interfaces.DbContext
 
         DbSet<ConferenceRoom> ConferenceRooms { get; set; }
 
-        DbSet<Service> Services { get; set; }
+        DbSet<OptionalService> OptionalServices { get; set; }
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

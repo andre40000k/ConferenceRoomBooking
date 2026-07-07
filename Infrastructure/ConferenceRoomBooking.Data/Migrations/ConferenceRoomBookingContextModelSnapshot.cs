@@ -23,9 +23,6 @@ namespace ConferenceRoomBooking.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
@@ -33,7 +30,7 @@ namespace ConferenceRoomBooking.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("StartAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
@@ -63,9 +60,6 @@ namespace ConferenceRoomBooking.Data.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
@@ -85,25 +79,14 @@ namespace ConferenceRoomBooking.Data.Migrations
 
                     b.HasIndex("BookingId");
 
-                    b.ToTable("ConferenceRooms", (string)null);
+                    b.ToTable("ConferenceRoom", (string)null);
                 });
 
-            modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.Service", b =>
+            modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.OptionalService", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
-
-                    b.Property<Guid>("ConferenceRoomId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -116,41 +99,18 @@ namespace ConferenceRoomBooking.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConferenceRoomId");
-
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("OptionalService", (string)null);
                 });
 
             modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.ConferenceRoom", b =>
                 {
                     b.HasOne("ConferenceRoomBooking.Domain.Entities.Booking", "Booking")
-                        .WithMany("ConferenceRooms")
+                        .WithMany()
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Booking");
-                });
-
-            modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.Service", b =>
-                {
-                    b.HasOne("ConferenceRoomBooking.Domain.Entities.ConferenceRoom", "ConferenceRoom")
-                        .WithMany("Services")
-                        .HasForeignKey("ConferenceRoomId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ConferenceRoom");
-                });
-
-            modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.Booking", b =>
-                {
-                    b.Navigation("ConferenceRooms");
-                });
-
-            modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.ConferenceRoom", b =>
-                {
-                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }

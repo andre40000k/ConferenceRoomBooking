@@ -15,10 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Responses\" />
-    <Folder Include="DTOs\Requests\" />
+    <Folder Include="DTOs\Responses\Service\" />
     <Folder Include="Queries\" />
-    <Folder Include="Commands\" />
   </ItemGroup>
 
 </Project>

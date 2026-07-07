@@ -9,9 +9,8 @@ namespace ConferenceRoomBooking.Data.Configuration
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
             builder.HasKey(k => k.Id);
-            builder.Property(p => p.StartAt)
-                .IsRequired()
-                .HasColumnType("datetime2");
+            builder.Property(p => p.Id)
+                .ValueGeneratedOnAdd();
 
             builder.Property(p => p.Duration)
                 .IsRequired()
@@ -30,7 +29,7 @@ namespace ConferenceRoomBooking.Data.Configuration
                 .IsRequired()
                 .HasColumnType("tinyint");
 
-            builder.ToTable("Booking");
+            builder.ToTable(nameof(Booking));
         }
     }
 }

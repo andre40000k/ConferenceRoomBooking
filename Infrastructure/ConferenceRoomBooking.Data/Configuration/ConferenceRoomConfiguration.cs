@@ -12,10 +12,10 @@ namespace ConferenceRoomBooking.Data.Configuration
             builder.Property(p => p.Id)
                 .ValueGeneratedOnAdd();
 
-            builder.HasOne(b => b.Booking)
-                .WithMany(c => c.ConferenceRooms)
-                .HasForeignKey(x => x.BookingId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasOne(b => b.Booking)
+            //    .WithMany(c => c.ConferenceRooms)
+            //    .HasForeignKey(x => x.BookingId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(p => p.Name)
                 .IsRequired()
@@ -39,7 +39,7 @@ namespace ConferenceRoomBooking.Data.Configuration
                 .HasColumnType("datetime2")
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            builder.ToTable("ConferenceRooms");
+            builder.ToTable(nameof(ConferenceRoom));
         }
     }
 }

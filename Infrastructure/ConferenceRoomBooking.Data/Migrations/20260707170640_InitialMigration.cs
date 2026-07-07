@@ -16,12 +16,11 @@ namespace ConferenceRoomBooking.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    StartAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Duration = table.Column<TimeSpan>(type: "time", nullable: false),
                     EndAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Status = table.Column<byte>(type: "tinyint", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Status = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +28,20 @@ namespace ConferenceRoomBooking.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConferenceRooms",
+                name: "OptionalService",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    ServicePrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OptionalService", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ConferenceRoom",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -38,61 +50,33 @@ namespace ConferenceRoomBooking.Data.Migrations
                     Capacity = table.Column<int>(type: "INTEGER", nullable: false),
                     BasePrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConferenceRooms", x => x.Id);
+                    table.PrimaryKey("PK_ConferenceRoom", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ConferenceRooms_Booking_BookingId",
+                        name: "FK_ConferenceRoom_Booking_BookingId",
                         column: x => x.BookingId,
                         principalTable: "Booking",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Services",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ConferenceRoomId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    ServicePrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Services", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Services_ConferenceRooms_ConferenceRoomId",
-                        column: x => x.ConferenceRoomId,
-                        principalTable: "ConferenceRooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_ConferenceRooms_BookingId",
-                table: "ConferenceRooms",
+                name: "IX_ConferenceRoom_BookingId",
+                table: "ConferenceRoom",
                 column: "BookingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Services_ConferenceRoomId",
-                table: "Services",
-                column: "ConferenceRoomId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "ConferenceRoom");
 
             migrationBuilder.DropTable(
-                name: "ConferenceRooms");
+                name: "OptionalService");
 
             migrationBuilder.DropTable(
                 name: "Booking");

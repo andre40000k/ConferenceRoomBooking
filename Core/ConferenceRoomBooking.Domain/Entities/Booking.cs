@@ -8,6 +8,6 @@
         public decimal TotalPrice { get; set; }
         public byte Status { get; set; }
 
-        public IEnumerable<ConferenceRoom> ConferenceRooms { get; set; }
+        //public IEnumerable<ConferenceRoom> ConferenceRooms { get; set; }
     }
 }

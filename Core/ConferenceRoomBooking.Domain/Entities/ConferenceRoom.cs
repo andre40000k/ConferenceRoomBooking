@@ -11,6 +11,6 @@
         public bool IsDeleted { get; set; }
         public DateTime UpdateAt { get; set; }
 
-        public IEnumerable<Service> Services { get; set; }
+        //public IEnumerable<Service> Services { get; set; }
     }
 }

@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\Core\ConferenceRoomBooking.Domain\ConferenceRoomBooking.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

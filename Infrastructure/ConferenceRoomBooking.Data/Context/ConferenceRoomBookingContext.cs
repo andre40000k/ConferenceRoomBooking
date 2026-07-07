@@ -12,7 +12,7 @@ namespace ConferenceRoomBooking.Data.Context
 
         public DbSet<ConferenceRoom> ConferenceRooms { get; set; }
 
-        public DbSet<Service> Services { get; set; }
+        public DbSet<OptionalService> OptionalServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,12 @@ namespace ConferenceRoomBooking.Data.Context
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return await base.SaveChangesAsync(cancellationToken);
+            
+            var bookings = await base.SaveChangesAsync(cancellationToken);
+
+            return bookings;
         }
+
+        
     }
 }

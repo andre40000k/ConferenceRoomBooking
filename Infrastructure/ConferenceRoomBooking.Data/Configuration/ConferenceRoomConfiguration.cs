@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConferenceRoomBooking.Data.Configuration
 {
-    public class ConferenceRoomConfiguration : IEntityTypeConfiguration<ConferenceRoom>
+    public class ConferenceRoomConfiguration : IEntityTypeConfiguration<ConferenceRoomEntity>
     {
-        public void Configure(EntityTypeBuilder<ConferenceRoom> builder)
+        public void Configure(EntityTypeBuilder<ConferenceRoomEntity> builder)
         {
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Id)
@@ -39,7 +39,7 @@ namespace ConferenceRoomBooking.Data.Configuration
                 .HasColumnType("datetime2")
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            builder.ToTable(nameof(ConferenceRoom));
+            builder.ToTable(nameof(ConferenceRoomEntity));
         }
     }
 }

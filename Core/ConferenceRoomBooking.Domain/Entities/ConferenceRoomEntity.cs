@@ -1,9 +1,9 @@
 ﻿namespace ConferenceRoomBooking.Domain.Entities
 {
-    public class ConferenceRoom : BaseEntity
+    public class ConferenceRoomEntity : BaseEntity
     {
         public Guid BookingId { get; set; }
-        public Booking Booking { get; set; }
+        public BookingEntity Booking { get; set; }
 
         public string Name { get; set; }
         public int Capacity { get; set; }

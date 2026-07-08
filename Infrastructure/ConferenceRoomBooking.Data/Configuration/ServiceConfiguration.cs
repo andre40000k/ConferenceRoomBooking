@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConferenceRoomBooking.Data.Configuration
 {
-    public class ServiceConfiguration : IEntityTypeConfiguration<OptionalService>
+    public class ServiceConfiguration : IEntityTypeConfiguration<OptionalServiceEntity>
     {
-        public void Configure(EntityTypeBuilder<OptionalService> builder)
+        public void Configure(EntityTypeBuilder<OptionalServiceEntity> builder)
         {
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Id)
@@ -31,7 +31,7 @@ namespace ConferenceRoomBooking.Data.Configuration
             //    .IsRequired()
             //    .HasDefaultValue(false);
 
-            builder.ToTable(nameof(OptionalService));
+            builder.ToTable(nameof(OptionalServiceEntity));
         }
     }
 }

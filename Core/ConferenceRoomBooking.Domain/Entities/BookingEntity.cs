@@ -1,6 +1,6 @@
 ﻿namespace ConferenceRoomBooking.Domain.Entities
 {
-    public class Booking : BaseEntity
+    public class BookingEntity : BaseEntity
     {
         public DateTime StartAt { get; set; }
         public TimeSpan Duration { get; set; }

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ConferenceRoomBooking.Application.Commands.ConferenceRoom;
+using ConferenceRoomBooking.Application.DTOs.Requests.ConferenceRoom;
+using ConferenceRoomBooking.Application.Interfaces.Sevices;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,17 +25,38 @@ namespace ConferenceRoomBooking.Api.Controllers
         //    return "value";
         //}
 
-        //// POST api/<ConferenceRoomsController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        // POST api/<ConferenceRoomsController>
+        [HttpPost]
+        public async Task<IActionResult> AddConferenceRoom([FromServices] IRequestHendler<AddConferenceRoomCommand> addConferenceRoomCommand, 
+            [FromBody] AddConferenceRoomRequest conferenceRoomRequest)
+        {
+            var conferenceRoomCommand = new AddConferenceRoomCommand
+            {
+                Name = conferenceRoomRequest.Name,
+                Capacity = conferenceRoomRequest.Capacity,
+                BasePrice = conferenceRoomRequest.BasePrice
+            };
 
-        //// PUT api/<ConferenceRoomsController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+            await addConferenceRoomCommand.HendlerAsync(conferenceRoomCommand);
+
+            return Ok(200);
+        }
+
+        // PUT api/<ConferenceRoomsController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpsertConferenceRoom([FromServices] IRequestHendler<UpsertConferenceRoomCommand> upsertConferenceRoomCommand, 
+            [FromBody] UpsertConferenceRoomRequest upsertConferenceRoomRequest)
+        {
+            await upsertConferenceRoomCommand.HendlerAsync(new UpsertConferenceRoomCommand
+            {
+                Id = upsertConferenceRoomRequest.Id,
+                Name = upsertConferenceRoomRequest.Name,
+                Capacity = upsertConferenceRoomRequest.Capacity,
+                BasePrice = upsertConferenceRoomRequest.BasePrice
+            });
+
+            return Ok(200);
+        }
 
         //// DELETE api/<ConferenceRoomsController>/5
         //[HttpDelete("{id}")]

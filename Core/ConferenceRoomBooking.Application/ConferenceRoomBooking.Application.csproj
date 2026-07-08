@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Responses\Service\" />
+    <Folder Include="DTOs\Requests\Booking\" />
+    <Folder Include="DTOs\Responses\ConferenceRoom\" />
+    <Folder Include="DTOs\Responses\OptionalService\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 

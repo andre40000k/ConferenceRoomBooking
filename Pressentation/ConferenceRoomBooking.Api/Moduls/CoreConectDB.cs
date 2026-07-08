@@ -1,5 +1,4 @@
 ﻿using ConferenceRoomBooking.Data.Context;
-using ConferenceRoomBooking.Domain.Interfaces.DbContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConferenceRoomBooking.Api.Moduls
@@ -17,7 +16,7 @@ namespace ConferenceRoomBooking.Api.Moduls
                 options.UseSqlite(connectionString, b => b.MigrationsAssembly(typeof(ConferenceRoomBookingContext).Assembly.FullName));
             });
 
-            services.AddScoped<IConferenceRoomBookingContext>(provider =>provider.GetRequiredService<ConferenceRoomBookingContext>());
+            //services.AddScoped<ConferenceRoomBookingContext>(provider =>provider.GetRequiredService<ConferenceRoomBookingContext>());
 
             return services;
         }

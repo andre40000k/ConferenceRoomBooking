@@ -1,6 +1,5 @@
-﻿using ConferenceRoomBooking.Application.Interfaces.Sevices;
-using ConferenceRoomBooking.Data.Context;
-using ConferenceRoomBooking.Domain.Interfaces.DbContext;
+﻿using ConferenceRoomBooking.Application.Interfaces.Repositories;
+using ConferenceRoomBooking.Application.Interfaces.Sevices;
 
 namespace ConferenceRoomBooking.Api.Moduls
 {
@@ -26,6 +25,12 @@ namespace ConferenceRoomBooking.Api.Moduls
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             .AddClasses(classes => classes.AssignableTo(typeof(IGetRepository)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            .AddClasses(classes => classes.AssignableTo(typeof(IConferenceRoomRepository)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            .AddClasses(classes => classes.AssignableTo(typeof(IOptionalServiceRepository)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 

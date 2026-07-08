@@ -1,33 +1,22 @@
 ﻿using ConferenceRoomBooking.Domain.Entities;
-using ConferenceRoomBooking.Domain.Interfaces.DbContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConferenceRoomBooking.Data.Context
 {
-    public class ConferenceRoomBookingContext : DbContext, IConferenceRoomBookingContext
+    public class ConferenceRoomBookingContext : DbContext
     {
         public ConferenceRoomBookingContext(DbContextOptions<ConferenceRoomBookingContext> options):base(options) { }
 
-        public DbSet<Booking> Bookings {  get; set; }
+        public DbSet<BookingEntity> Bookings {  get; set; }
 
-        public DbSet<ConferenceRoom> ConferenceRooms { get; set; }
+        public DbSet<ConferenceRoomEntity> ConferenceRooms { get; set; }
 
-        public DbSet<OptionalService> OptionalServices { get; set; }
+        public DbSet<OptionalServiceEntity> OptionalServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ConferenceRoomBookingContext).Assembly);
         }
-
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-        {
-            
-            var bookings = await base.SaveChangesAsync(cancellationToken);
-
-            return bookings;
-        }
-
-        
     }
 }

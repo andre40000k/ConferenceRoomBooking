@@ -1,6 +1,6 @@
 ﻿namespace ConferenceRoomBooking.Domain.Entities
 {
-    public class OptionalService : BaseEntity
+    public class OptionalServiceEntity : BaseEntity
     {
         //public Guid ConferenceRoomId { get; set; }
         //public ConferenceRoom ConferenceRoom { get; set; }

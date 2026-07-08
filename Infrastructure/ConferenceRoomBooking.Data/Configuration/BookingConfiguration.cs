@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConferenceRoomBooking.Data.Configuration
 {
-    public class BookingConfiguration : IEntityTypeConfiguration<Booking>
+    public class BookingConfiguration : IEntityTypeConfiguration<BookingEntity>
     {
-        public void Configure(EntityTypeBuilder<Booking> builder)
+        public void Configure(EntityTypeBuilder<BookingEntity> builder)
         {
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Id)
@@ -29,7 +29,7 @@ namespace ConferenceRoomBooking.Data.Configuration
                 .IsRequired()
                 .HasColumnType("tinyint");
 
-            builder.ToTable(nameof(Booking));
+            builder.ToTable(nameof(BookingEntity));
         }
     }
 }

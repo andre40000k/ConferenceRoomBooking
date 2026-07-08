@@ -5,7 +5,6 @@
   </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/ConferenceRoomBooking.Data/ConferenceRoomBooking.Data.csproj" />
-    <Project Path="Infrastructure/ConferenceRoomBooking.Repositories/ConferenceRoomBooking.Repositories.csproj" />
   </Folder>
   <Folder Name="/Pressentation/">
     <Project Path="Pressentation/ConferenceRoomBooking.Api/ConferenceRoomBooking.Api.csproj" />

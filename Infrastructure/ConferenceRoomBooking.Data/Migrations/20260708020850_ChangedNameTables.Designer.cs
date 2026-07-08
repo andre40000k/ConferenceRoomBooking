@@ -53,7 +53,7 @@ namespace ConferenceRoomBooking.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("BasePrice")
+                    b.Property<decimal>("BaseHourPrice")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 

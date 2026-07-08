@@ -2,12 +2,14 @@
 {
     public class BookingEntity : BaseEntity
     {
+        public Guid ConferenceRoomId { get; set; }
+        public ConferenceRoomEntity ConferenceRoomEntity { get; set; } = null!;
+
         public DateTime StartAt { get; set; }
-        public TimeSpan Duration { get; set; }
-        public DateTime EndAt { get; set; }
+        public TimeSpan DurationHours { get; set; }
         public decimal TotalPrice { get; set; }
         public byte Status { get; set; }
 
-        //public IEnumerable<ConferenceRoom> ConferenceRooms { get; set; }
+        public ICollection<BookingServiceEntity> BookingServices { get; set; } = [];
     }
 }

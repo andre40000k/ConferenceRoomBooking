@@ -14,5 +14,8 @@ namespace ConferenceRoomBooking.Application.Interfaces.Repositories
         int capacity,
         decimal basePrice,
         CancellationToken cancellationToken);
+
+        Task DeletedAsync(Guid id,
+            CancellationToken cancellationToken);
     }
 }

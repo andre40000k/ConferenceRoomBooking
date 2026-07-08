@@ -58,10 +58,16 @@ namespace ConferenceRoomBooking.Api.Controllers
             return Ok(200);
         }
 
-        //// DELETE api/<ConferenceRoomsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        // DELETE api/<ConferenceRoomsController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteConferenceRoom([FromServices] IRequestHendler<DeleteConferenceRoomCommand> deleteConferenceRoomCommand,
+            Guid idRequest)
+        {
+            await deleteConferenceRoomCommand.HendlerAsync(new DeleteConferenceRoomCommand
+            {
+                Id = idRequest
+            });
+            return Ok(200);
+        }
     }
 }

@@ -12,11 +12,6 @@ namespace ConferenceRoomBooking.Data.Configuration
             builder.Property(p => p.Id)
                 .ValueGeneratedOnAdd();
 
-            //builder.HasOne(b => b.Booking)
-            //    .WithMany(c => c.ConferenceRooms)
-            //    .HasForeignKey(x => x.BookingId)
-            //    .OnDelete(DeleteBehavior.Cascade);
-
             builder.Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(200)
@@ -25,19 +20,10 @@ namespace ConferenceRoomBooking.Data.Configuration
             builder.Property(p => p.Capacity)
                 .IsRequired();
 
-            builder.Property(p => p.BasePrice)
+            builder.Property(p => p.BaseHourPrice)
                 .IsRequired()
                 .HasColumnType("decimal(18,2)")
                 .HasPrecision(18, 2);
-
-            builder.Property(p => p.IsDeleted)
-                .IsRequired()
-                .HasDefaultValue(false);
-
-            builder.Property(p => p.UpdateAt)
-                .IsRequired()
-                .HasColumnType("datetime2")
-                .HasDefaultValueSql("GETUTCDATE()");
 
             builder.ToTable(nameof(ConferenceRoomEntity));
         }

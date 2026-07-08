@@ -2,15 +2,11 @@
 {
     public class ConferenceRoomEntity : BaseEntity
     {
-        public Guid BookingId { get; set; }
-        public BookingEntity Booking { get; set; }
-
         public string Name { get; set; }
         public int Capacity { get; set; }
-        public decimal BasePrice { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public decimal BaseHourPrice { get; set; }
+        public ICollection<RoomServiceEntity> RoomServices { get; set; } = [];
 
-        //public IEnumerable<Service> Services { get; set; }
+        public ICollection<BookingEntity> BookingEntitys { get; set; } = [];
     }
 }

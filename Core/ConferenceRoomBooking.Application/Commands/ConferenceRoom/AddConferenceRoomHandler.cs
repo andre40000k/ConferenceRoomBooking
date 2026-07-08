@@ -19,8 +19,8 @@ namespace ConferenceRoomBooking.Application.Commands.ConferenceRoom
             {
                 Name = request.Name,
                 Capacity = request.Capacity,
-                BasePrice = request.BasePrice,
-                UpdateAt = DateTime.UtcNow,
+                BaseHourPrice = request.BasePrice,
+                //UpdateAt = DateTime.UtcNow,
                 //IsDeleted = false,
                 //BookingId = Guid.NewGuid(),
                 //Booking = new BookingEntity

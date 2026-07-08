@@ -20,6 +20,11 @@ namespace ConferenceRoomBooking.Data.Repositories.ConferenceRoom
             await _db.SaveChangesAsync(cancellationToken);
         }
 
+        public async Task DeletedAsync(Guid id, CancellationToken cancellationToken)
+        {
+            await _db.ConferenceRooms.Where(x => x.Id == id).ExecuteDeleteAsync(cancellationToken);
+        }
+
         public async Task UpdateAsync(Guid id, string name, int capacity, decimal basePrice, CancellationToken cancellationToken)
         {
             await _db.ConferenceRooms
@@ -27,7 +32,7 @@ namespace ConferenceRoomBooking.Data.Repositories.ConferenceRoom
             .ExecuteUpdateAsync(s => s
                 .SetProperty(x => x.Name, name)
                 .SetProperty(x => x.Capacity, capacity)
-                .SetProperty(x => x.BasePrice, basePrice),
+                .SetProperty(x => x.BaseHourPrice, basePrice),
                 cancellationToken);
         }
 

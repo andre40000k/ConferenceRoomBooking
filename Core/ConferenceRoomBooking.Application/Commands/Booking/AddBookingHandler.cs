@@ -27,6 +27,8 @@ namespace ConferenceRoomBooking.Application.Commands.Booking
         }
         public async Task<AddBookingResponse> HandlerAsync(AddBookingCommand request, CancellationToken cancellationToken = default)
         {
+            // Тут не хватает одной проверки на то что комната уже забронирована в это время, а так же валидаций но я не стал усложнять код.
+
             var room = await _getRoomHandler.HandlerAsync(new GetByIdConferenceRoomsQuery
             {
                 Id = request.ConferenceRoomId

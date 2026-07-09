@@ -24,5 +24,11 @@ Backend-сервис для управления бронью конференц
 - Конфигурация бизнес-правил ценообразования хранится в JSON (Infrastructure/ConferenceRoomBooking.JSON) и загружается через репозиторий правил.
 - Транзакционность и обработка конфликтов: проверки конфликтов броней выполняются в Application-слое; при необходимости используются транзакции EF Core для атомарности.
 
+Описание базы данных
+- DbContext: ConferenceRoomBookingContext (Infrastructure/ConferenceRoomBooking.Data/Context).
+- Основные таблицы (соответствуют сущностям в Domain): Bookings, ConferenceRooms, OptionalServices, BookingServices, RoomServices.
+- Миграции расположены в Infrastructure/ConferenceRoomBooking.Data/Migrations.
+- Для разработки в репозитории присутствует sqlite база: Infrastructure/ConferenceRoomBooking.Data/ConferenceRoomBookingDatabase.db.
+
 
 

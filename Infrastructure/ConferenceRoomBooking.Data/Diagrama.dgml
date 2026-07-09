@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Database" Label="ConferenceRoomBookingDatabase.db" Category="Database" Group="Expanded" />
+    <Node Id="BookingEntity" Label="BookingEntity" Category="Table" Group="Collapsed" />
+    <Node Id="BookingEntity_Id" Label="Id" Category="Field Primary" Description="text" />
+    <Node Id="BookingEntity_ConferenceRoomId" Label="ConferenceRoomId" Category="Field Foreign" Description="text" />
+    <Node Id="BookingEntity_DurationHours" Label="DurationHours" Category="Field" Description="time" />
+    <Node Id="BookingEntity_StartAt" Label="StartAt" Category="Field" Description="text" />
+    <Node Id="BookingEntity_Status" Label="Status" Category="Field" Description="bigint" />
+    <Node Id="BookingEntity_TotalPrice" Label="TotalPrice" Category="Field" Description="decimal" />
+    <Node Id="BookingServiceEntity" Label="BookingServiceEntity" Category="Table" Group="Collapsed" />
+    <Node Id="BookingServiceEntity_BookingId" Label="BookingId" Category="Field Primary" Description="text" />
+    <Node Id="BookingServiceEntity_OptionalServiceId" Label="OptionalServiceId" Category="Field Primary" Description="text" />
+    <Node Id="ConferenceRoomEntity" Label="ConferenceRoomEntity" Category="Table" Group="Collapsed" />
+    <Node Id="ConferenceRoomEntity_Id" Label="Id" Category="Field Primary" Description="text" />
+    <Node Id="ConferenceRoomEntity_BaseHourPrice" Label="BaseHourPrice" Category="Field" Description="decimal" />
+    <Node Id="ConferenceRoomEntity_Capacity" Label="Capacity" Category="Field" Description="bigint" />
+    <Node Id="ConferenceRoomEntity_Name" Label="Name" Category="Field" Description="nvarchar(200)" />
+    <Node Id="OptionalServiceEntity" Label="OptionalServiceEntity" Category="Table" Group="Collapsed" />
+    <Node Id="OptionalServiceEntity_Id" Label="Id" Category="Field Primary" Description="text" />
+    <Node Id="OptionalServiceEntity_Name" Label="Name" Category="Field" Description="nvarchar(200)" />
+    <Node Id="OptionalServiceEntity_ServicePrice" Label="ServicePrice" Category="Field" Description="decimal" />
+    <Node Id="RoomServiceEntity" Label="RoomServiceEntity" Category="Table" Group="Collapsed" />
+    <Node Id="RoomServiceEntity_ConferenceRoomId" Label="ConferenceRoomId" Category="Field Primary" Description="text" />
+    <Node Id="RoomServiceEntity_OptionalServiceId" Label="OptionalServiceId" Category="Field Primary" Description="text" />
+  </Nodes>
+  <Links>
+    <Link Source="Database" Target="BookingEntity" Category="Contains" />
+    <Link Source="BookingEntity" Target="BookingEntity_Id" Category="Contains" />
+    <Link Source="BookingEntity" Target="BookingEntity_ConferenceRoomId" Category="Contains" />
+    <Link Source="BookingEntity" Target="BookingEntity_DurationHours" Category="Contains" />
+    <Link Source="BookingEntity" Target="BookingEntity_StartAt" Category="Contains" />
+    <Link Source="BookingEntity" Target="BookingEntity_Status" Category="Contains" />
+    <Link Source="BookingEntity" Target="BookingEntity_TotalPrice" Category="Contains" />
+    <Link Source="BookingEntity_ConferenceRoomId" Target="ConferenceRoomEntity_Id" Label="FK_BookingEntity_0_0" Category="Foreign Key" />
+    <Link Source="Database" Target="BookingServiceEntity" Category="Contains" />
+    <Link Source="BookingServiceEntity" Target="BookingServiceEntity_BookingId" Category="Contains" />
+    <Link Source="BookingServiceEntity" Target="BookingServiceEntity_OptionalServiceId" Category="Contains" />
+    <Link Source="BookingServiceEntity_OptionalServiceId" Target="OptionalServiceEntity_Id" Label="FK_BookingServiceEntity_0_0" Category="Foreign Key" />
+    <Link Source="BookingServiceEntity_BookingId" Target="BookingEntity_Id" Label="FK_BookingServiceEntity_1_0" Category="Foreign Key" />
+    <Link Source="Database" Target="ConferenceRoomEntity" Category="Contains" />
+    <Link Source="ConferenceRoomEntity" Target="ConferenceRoomEntity_Id" Category="Contains" />
+    <Link Source="ConferenceRoomEntity" Target="ConferenceRoomEntity_BaseHourPrice" Category="Contains" />
+    <Link Source="ConferenceRoomEntity" Target="ConferenceRoomEntity_Capacity" Category="Contains" />
+    <Link Source="ConferenceRoomEntity" Target="ConferenceRoomEntity_Name" Category="Contains" />
+    <Link Source="Database" Target="OptionalServiceEntity" Category="Contains" />
+    <Link Source="OptionalServiceEntity" Target="OptionalServiceEntity_Id" Category="Contains" />
+    <Link Source="OptionalServiceEntity" Target="OptionalServiceEntity_Name" Category="Contains" />
+    <Link Source="OptionalServiceEntity" Target="OptionalServiceEntity_ServicePrice" Category="Contains" />
+    <Link Source="Database" Target="RoomServiceEntity" Category="Contains" />
+    <Link Source="RoomServiceEntity" Target="RoomServiceEntity_ConferenceRoomId" Category="Contains" />
+    <Link Source="RoomServiceEntity" Target="RoomServiceEntity_OptionalServiceId" Category="Contains" />
+    <Link Source="RoomServiceEntity_OptionalServiceId" Target="OptionalServiceEntity_Id" Label="FK_RoomServiceEntity_0_0" Category="Foreign Key" />
+    <Link Source="RoomServiceEntity_ConferenceRoomId" Target="ConferenceRoomEntity_Id" Label="FK_RoomServiceEntity_1_0" Category="Foreign Key" />
+  </Links>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Table" ValueLabel="True">
+      <Condition Expression="HasCategory('Table')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Schema" ValueLabel="True">
+      <Condition Expression="HasCategory('Schema')" />
+      <Setter Property="Background" Value="#FF7F9169" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field" ValueLabel="True">
+      <Condition Expression="HasCategory('Field')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Database" ValueLabel="True">
+      <Condition Expression="HasCategory('Database')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+</DirectedGraph>

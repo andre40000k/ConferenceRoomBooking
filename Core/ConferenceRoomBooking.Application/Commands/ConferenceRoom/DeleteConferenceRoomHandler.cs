@@ -3,7 +3,7 @@ using ConferenceRoomBooking.Application.Interfaces.Sevices;
 
 namespace ConferenceRoomBooking.Application.Commands.ConferenceRoom
 {
-    public class DeleteConferenceRoomHandler : IRequestHandler<DeleteConferenceRoomCommand>
+    public class DeleteConferenceRoomHandler : IRequestHandler<DeleteConferenceRoomCommand, int>
     {
         private readonly IConferenceRoomRepository _repository;
 
@@ -12,9 +12,9 @@ namespace ConferenceRoomBooking.Application.Commands.ConferenceRoom
             _repository = repository;
         }
 
-        public async Task HandlerAsync(DeleteConferenceRoomCommand requestId, CancellationToken cancellationToken = default)
+        public async Task<int> HandlerAsync(DeleteConferenceRoomCommand requestId, CancellationToken cancellationToken = default)
         {
-            await _repository.DeletedAsync(requestId.Id, cancellationToken);
+           return await _repository.DeletedAsync(requestId.Id, cancellationToken);
         }
     }
 }

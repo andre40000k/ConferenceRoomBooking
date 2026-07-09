@@ -5,18 +5,18 @@ namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 {
     public interface IConferenceRoomRepository
     {
-        Task AddAsync(
+        Task<AddConferenceRoomResponse> AddAsync(
         ConferenceRoomEntity conferenceRoomEntity,
         CancellationToken cancellationToken);
 
-        Task UpdateAsync(
+        Task<int> UpdateAsync(
         Guid id,
         string name,
         int capacity,
         decimal basePrice,
         CancellationToken cancellationToken);
 
-        Task DeletedAsync(Guid id,
+        Task<int> DeletedAsync(Guid id,
             CancellationToken cancellationToken);
 
         Task<ConferenceRoomEntity> GetByIdRoomsAsync(

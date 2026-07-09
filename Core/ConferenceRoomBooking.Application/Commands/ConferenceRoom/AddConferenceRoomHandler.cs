@@ -1,10 +1,11 @@
-﻿using ConferenceRoomBooking.Application.Interfaces.Repositories;
+﻿using ConferenceRoomBooking.Application.DTOs.Responses.ConferenceRoom;
+using ConferenceRoomBooking.Application.Interfaces.Repositories;
 using ConferenceRoomBooking.Application.Interfaces.Sevices;
 using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Commands.ConferenceRoom
 {
-    public class AddConferenceRoomHandler : IRequestHandler<AddConferenceRoomCommand>
+    public class AddConferenceRoomHandler : IRequestHandler<AddConferenceRoomCommand, AddConferenceRoomResponse>
     {
         private readonly IConferenceRoomRepository _repository;
 
@@ -13,23 +14,13 @@ namespace ConferenceRoomBooking.Application.Commands.ConferenceRoom
             _repository = repository;
         }
 
-        public async Task HandlerAsync(AddConferenceRoomCommand request, CancellationToken cancellationToken = default)
+        public async Task<AddConferenceRoomResponse> HandlerAsync(AddConferenceRoomCommand request, CancellationToken cancellationToken = default)
         {
-            await _repository.AddAsync(new ConferenceRoomEntity
+            return await _repository.AddAsync(new ConferenceRoomEntity
             {
                 Name = request.Name,
                 Capacity = request.Capacity,
-                BaseHourPrice = request.BasePrice,
-                //UpdateAt = DateTime.UtcNow,
-                //IsDeleted = false,
-                //BookingId = Guid.NewGuid(),
-                //Booking = new BookingEntity
-                //{
-                //    StartDate = DateTime.UtcNow,
-                //    EndDate = DateTime.UtcNow.AddHours(1),
-                //    IsDeleted = false,
-                //    UpdateAt = DateTime.UtcNow
-                //}
+                BaseHourPrice = request.BasePrice
 
             }, cancellationToken);
         }

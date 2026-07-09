@@ -1,4 +1,5 @@
-﻿using ConferenceRoomBooking.Application.Interfaces.Repositories;
+﻿using ConferenceRoomBooking.Application.DTOs.Responses.Booking;
+using ConferenceRoomBooking.Application.Interfaces.Repositories;
 using ConferenceRoomBooking.Application.Interfaces.Sevices;
 using ConferenceRoomBooking.Application.Queries.Calculation;
 using ConferenceRoomBooking.Application.Queries.ConferenceRoom;
@@ -7,7 +8,7 @@ using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Commands.Booking
 {
-    public class AddBookingHandler : IRequestHandler<AddBookingCommand>
+    public class AddBookingHandler : IRequestHandler<AddBookingCommand, AddBookingResponse>
     {
         private readonly IBookingRepository _repository;
         private readonly IRequestHandler<GetByIdConferenceRoomsQuery, ConferenceRoomEntity> _getRoomHandler;
@@ -24,7 +25,7 @@ namespace ConferenceRoomBooking.Application.Commands.Booking
             _getServicesHandler = getServicesHandler;
             _requestCalculateRentHendler = requestCalculateRentHendler;
         }
-        public async Task HandlerAsync(AddBookingCommand request, CancellationToken cancellationToken = default)
+        public async Task<AddBookingResponse> HandlerAsync(AddBookingCommand request, CancellationToken cancellationToken = default)
         {
             var room = await _getRoomHandler.HandlerAsync(new GetByIdConferenceRoomsQuery
             {
@@ -56,6 +57,12 @@ namespace ConferenceRoomBooking.Application.Commands.Booking
                     OptionalServiceId = x
                 }).ToList()
             }, cancellationToken);
+
+            return new AddBookingResponse
+            {
+                TotalPrice = totalPrice,
+                Status = "Success"
+            };
         }
     }
 }

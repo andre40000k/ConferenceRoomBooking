@@ -15,15 +15,20 @@ namespace ConferenceRoomBooking.Data.Repositories.ConferenceRoom
             _db = db ?? throw new ArgumentNullException(nameof(db)); ;
         }
 
-        public async Task AddAsync(ConferenceRoomEntity conferenceRoomEntity, CancellationToken cancellationToken)
+        public async Task<AddConferenceRoomResponse> AddAsync(ConferenceRoomEntity conferenceRoomEntity, CancellationToken cancellationToken)
         {
             _db.ConferenceRooms.Add(conferenceRoomEntity);
-            await _db.SaveChangesAsync(cancellationToken);
+            var status = await _db.SaveChangesAsync(cancellationToken);
+            return new AddConferenceRoomResponse
+            {
+                Id = conferenceRoomEntity.Id,
+                Status = status
+            };
         }
 
-        public async Task DeletedAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<int> DeletedAsync(Guid id, CancellationToken cancellationToken)
         {
-            await _db.ConferenceRooms.Where(x => x.Id == id).ExecuteDeleteAsync(cancellationToken);
+            return await _db.ConferenceRooms.Where(x => x.Id == id).ExecuteDeleteAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<AvailableConferenceRoomRespons>> GetAvailableRoomsAsync(DateTime startDateTime, TimeSpan durationHours, int capacity, CancellationToken cancellationToken = default)
@@ -59,9 +64,9 @@ namespace ConferenceRoomBooking.Data.Repositories.ConferenceRoom
             return room;
         }
 
-        public async Task UpdateAsync(Guid id, string name, int capacity, decimal basePrice, CancellationToken cancellationToken)
+        public async Task<int> UpdateAsync(Guid id, string name, int capacity, decimal basePrice, CancellationToken cancellationToken)
         {
-            await _db.ConferenceRooms
+            return await _db.ConferenceRooms
             .Where(x => x.Id == id)
             .ExecuteUpdateAsync(s => s
                 .SetProperty(x => x.Name, name)

@@ -1,9 +1,8 @@
 ﻿using ConferenceRoomBooking.Application.Commands.Booking;
 using ConferenceRoomBooking.Application.DTOs.Requests.Booking;
+using ConferenceRoomBooking.Application.DTOs.Responses.Booking;
 using ConferenceRoomBooking.Application.Interfaces.Sevices;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ConferenceRoomBooking.Api.Controllers
 {
@@ -11,45 +10,19 @@ namespace ConferenceRoomBooking.Api.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
-        //// GET: api/<BookingsController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET api/<BookingsController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST api/<BookingsController>
         [HttpPost]
-        public async Task<IActionResult> AddBooking([FromServices] IRequestHandler<AddBookingCommand> requestHendler,
+        public async Task<IActionResult> AddBooking([FromServices] IRequestHandler<AddBookingCommand, AddBookingResponse> requestHendler,
             [FromBody] AddBookingRequest addBookingRequest)
         {
-            await requestHendler.HandlerAsync(new AddBookingCommand
+            var result = await requestHendler.HandlerAsync(new AddBookingCommand
             {
                 ConferenceRoomId = addBookingRequest.ConferenceRoomId,
                 StartAt = addBookingRequest.StartAt,
                 DurationHours = addBookingRequest.DurationHours,
                 ServiceIds = addBookingRequest.ServiceIds
             });
-            return Ok(200);
+
+            return Ok(result);
         }
-
-        //// PUT api/<BookingsController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<BookingsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

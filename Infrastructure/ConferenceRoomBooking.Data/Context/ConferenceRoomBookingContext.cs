@@ -13,6 +13,10 @@ namespace ConferenceRoomBooking.Data.Context
 
         public DbSet<OptionalServiceEntity> OptionalServices { get; set; }
 
+        public DbSet<BookingServiceEntity> BookingServices { get; set; }
+
+        public DbSet<RoomServiceEntity> RoomServiceEntities { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

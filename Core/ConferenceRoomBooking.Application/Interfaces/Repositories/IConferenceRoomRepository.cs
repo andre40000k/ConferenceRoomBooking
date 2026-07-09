@@ -1,4 +1,5 @@
-﻿using ConferenceRoomBooking.Domain.Entities;
+﻿using ConferenceRoomBooking.Application.DTOs.Responses.ConferenceRoom;
+using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 {
@@ -17,5 +18,11 @@ namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 
         Task DeletedAsync(Guid id,
             CancellationToken cancellationToken);
+
+        Task<IEnumerable<AvailableConferenceRoomRespons>> GetAvailableRoomsAsync(
+        DateTime startDateTime,
+        TimeSpan durationHours,
+        int capacity,
+        CancellationToken cancellationToken = default);
     }
 }

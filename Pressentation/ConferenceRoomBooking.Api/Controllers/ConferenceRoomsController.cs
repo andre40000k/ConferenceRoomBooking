@@ -1,6 +1,8 @@
 ﻿using ConferenceRoomBooking.Application.Commands.ConferenceRoom;
 using ConferenceRoomBooking.Application.DTOs.Requests.ConferenceRoom;
+using ConferenceRoomBooking.Application.DTOs.Responses.ConferenceRoom;
 using ConferenceRoomBooking.Application.Interfaces.Sevices;
+using ConferenceRoomBooking.Application.Queries.ConferenceRoom;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,11 +21,19 @@ namespace ConferenceRoomBooking.Api.Controllers
         //}
 
         //// GET api/<ConferenceRoomsController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AvailableConferenceRoomRespons>>> GetAvailableRooms([FromServices] IRequestHendler<GetAvailableConferenceRoomsQuery, IEnumerable<AvailableConferenceRoomRespons>> requestHendler,
+            [FromBody] AvailableConferenceRoomRequest availableConferenceRoom)
+        {
+            var query = new GetAvailableConferenceRoomsQuery
+            {
+                StartDateTime = availableConferenceRoom.StartAt,
+                DurationHours = availableConferenceRoom.DurationHours,
+                Capacity = availableConferenceRoom.Capacity
+            };
+
+            return Ok(await requestHendler.HendlerAsync(query));
+        }
 
         // POST api/<ConferenceRoomsController>
         [HttpPost]
@@ -43,7 +53,7 @@ namespace ConferenceRoomBooking.Api.Controllers
         }
 
         // PUT api/<ConferenceRoomsController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpsertConferenceRoom([FromServices] IRequestHendler<UpsertConferenceRoomCommand> upsertConferenceRoomCommand, 
             [FromBody] UpsertConferenceRoomRequest upsertConferenceRoomRequest)
         {
@@ -59,7 +69,7 @@ namespace ConferenceRoomBooking.Api.Controllers
         }
 
         // DELETE api/<ConferenceRoomsController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteConferenceRoom([FromServices] IRequestHendler<DeleteConferenceRoomCommand> deleteConferenceRoomCommand,
             Guid idRequest)
         {

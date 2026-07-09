@@ -1,4 +1,5 @@
-﻿using ConferenceRoomBooking.Application.Interfaces.Repositories;
+﻿using ConferenceRoomBooking.Application.DTOs.Responses.ConferenceRoom;
+using ConferenceRoomBooking.Application.Interfaces.Repositories;
 using ConferenceRoomBooking.Data.Context;
 using ConferenceRoomBooking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,28 @@ namespace ConferenceRoomBooking.Data.Repositories.ConferenceRoom
         public async Task DeletedAsync(Guid id, CancellationToken cancellationToken)
         {
             await _db.ConferenceRooms.Where(x => x.Id == id).ExecuteDeleteAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<AvailableConferenceRoomRespons>> GetAvailableRoomsAsync(DateTime startDateTime, TimeSpan durationHours, int capacity, CancellationToken cancellationToken = default)
+        {
+            var endDateTime = startDateTime.Add(durationHours);
+
+            var rooms = await _db.ConferenceRooms
+                .AsNoTracking()
+                .Where(r => r.Capacity >= capacity)
+                .Where(r => !r.BookingEntitys.Any(b =>
+                    startDateTime < b.StartAt.Add(b.DurationHours) &&
+                    endDateTime > b.StartAt))
+                .Select(r => new AvailableConferenceRoomRespons
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Capacity = r.Capacity,
+                    BaseHourPrice = r.BaseHourPrice,
+                })
+                .ToListAsync(cancellationToken);
+
+            return rooms;
         }
 
         public async Task UpdateAsync(Guid id, string name, int capacity, decimal basePrice, CancellationToken cancellationToken)

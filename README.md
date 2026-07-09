@@ -29,6 +29,7 @@ Backend-сервис для управления бронью конференц
 - Основные таблицы (соответствуют сущностям в Domain): Bookings, ConferenceRooms, OptionalServices, BookingServices, RoomServices.
 - Миграции расположены в Infrastructure/ConferenceRoomBooking.Data/Migrations.
 - Для разработки в репозитории присутствует sqlite база: Infrastructure/ConferenceRoomBooking.Data/ConferenceRoomBookingDatabase.db.
+- Ниже приведене графическая схема связей бд
 
-
+<img width="518" height="240" alt="image" src="https://github.com/user-attachments/assets/ba348651-90e7-4c26-8e95-6efe553f9750" />
 

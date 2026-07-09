@@ -27,7 +27,7 @@ namespace ConferenceRoomBooking.Api.Controllers
 
         // POST api/<ServicesController>
         [HttpPost]
-        public async Task<IActionResult> AddService([FromServices] IRequestHendler<UpsertServiceCommand> upsertServiceCommand , [FromBody] ServiceRequest serviceRequest)
+        public async Task<IActionResult> AddService([FromServices] IRequestHandler<UpsertServiceCommand> upsertServiceCommand , [FromBody] ServiceRequest serviceRequest)
         {
             var service = new UpsertServiceCommand
             {
@@ -35,7 +35,7 @@ namespace ConferenceRoomBooking.Api.Controllers
                 Price = serviceRequest.Price
             };
 
-            await upsertServiceCommand.HendlerAsync(service);
+            await upsertServiceCommand.HandlerAsync(service);
 
             return Ok(200);
         }

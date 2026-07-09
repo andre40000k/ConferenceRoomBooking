@@ -4,7 +4,7 @@ using ConferenceRoomBooking.Application.Interfaces.Sevices;
 
 namespace ConferenceRoomBooking.Application.Queries.ConferenceRoom
 {
-    public class GetAvailableConferenceRoomsHandler : IRequestHendler<GetAvailableConferenceRoomsQuery, IEnumerable<AvailableConferenceRoomRespons>>
+    public class GetAvailableConferenceRoomsHandler : IRequestHandler<GetAvailableConferenceRoomsQuery, IEnumerable<AvailableConferenceRoomRespons>>
     {
         private readonly IConferenceRoomRepository _repository;
 
@@ -12,7 +12,7 @@ namespace ConferenceRoomBooking.Application.Queries.ConferenceRoom
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<AvailableConferenceRoomRespons>> HendlerAsync(GetAvailableConferenceRoomsQuery request, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<AvailableConferenceRoomRespons>> HandlerAsync(GetAvailableConferenceRoomsQuery request, CancellationToken cancellationToken = default)
         {
             return await _repository.GetAvailableRoomsAsync(
                 request.StartDateTime,

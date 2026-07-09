@@ -4,7 +4,7 @@ using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Queries.ConferenceRoom
 {
-    public class GetByIdConferenceRoomsHandler : IRequestHendler<GetByIdConferenceRoomsQuery, ConferenceRoomEntity>
+    public class GetByIdConferenceRoomsHandler : IRequestHandler<GetByIdConferenceRoomsQuery, ConferenceRoomEntity>
     {
         private readonly IConferenceRoomRepository _repository;
 
@@ -12,7 +12,7 @@ namespace ConferenceRoomBooking.Application.Queries.ConferenceRoom
         {
             _repository = repository;
         }
-        public async Task<ConferenceRoomEntity> HendlerAsync(GetByIdConferenceRoomsQuery request, CancellationToken cancellationToken = default)
+        public async Task<ConferenceRoomEntity> HandlerAsync(GetByIdConferenceRoomsQuery request, CancellationToken cancellationToken = default)
         {
             return await _repository.GetByIdRoomsAsync(request.Id, cancellationToken);
         }

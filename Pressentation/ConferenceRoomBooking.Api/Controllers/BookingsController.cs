@@ -27,10 +27,10 @@ namespace ConferenceRoomBooking.Api.Controllers
 
         // POST api/<BookingsController>
         [HttpPost]
-        public async Task<IActionResult> AddBooking([FromServices] IRequestHendler<AddBookingCommand> requestHendler,
+        public async Task<IActionResult> AddBooking([FromServices] IRequestHandler<AddBookingCommand> requestHendler,
             [FromBody] AddBookingRequest addBookingRequest)
         {
-            await requestHendler.HendlerAsync(new AddBookingCommand
+            await requestHendler.HandlerAsync(new AddBookingCommand
             {
                 ConferenceRoomId = addBookingRequest.ConferenceRoomId,
                 StartAt = addBookingRequest.StartAt,

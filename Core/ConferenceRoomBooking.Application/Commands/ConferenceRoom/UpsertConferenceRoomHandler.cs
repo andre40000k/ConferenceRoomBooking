@@ -3,7 +3,7 @@ using ConferenceRoomBooking.Application.Interfaces.Sevices;
 
 namespace ConferenceRoomBooking.Application.Commands.ConferenceRoom
 {
-    public class UpsertConferenceRoomHandler : IRequestHendler<UpsertConferenceRoomCommand>
+    public class UpsertConferenceRoomHandler : IRequestHandler<UpsertConferenceRoomCommand>
     {
         private readonly IConferenceRoomRepository _repository;
 
@@ -12,7 +12,7 @@ namespace ConferenceRoomBooking.Application.Commands.ConferenceRoom
         {
             _repository = repository;
         }
-        public async Task HendlerAsync(UpsertConferenceRoomCommand requestConferenceRoom, CancellationToken cancellationToken = default)
+        public async Task HandlerAsync(UpsertConferenceRoomCommand requestConferenceRoom, CancellationToken cancellationToken = default)
         {
             await _repository.UpdateAsync(
             requestConferenceRoom.Id,

@@ -2,22 +2,22 @@
 
 namespace ConferenceRoomBooking.Application.Interfaces.Sevices
 {
-    public interface IResponsHendler<IRespons>
+    public interface IResponsHandler<IRespons>
     {
-        Task<IRespons> HendlerAsync(CancellationToken cancellationToken = default);
+        Task<IRespons> HandlerAsync(CancellationToken cancellationToken = default);
     }
-    public interface IRequestHendler<in IRequest>
+    public interface IRequestHandler<in IRequest>
     {
-        Task HendlerAsync(IRequest request, CancellationToken cancellationToken = default);
-    }
-
-    public interface IRequestHendler<in IRequest, IRespons>
-    {
-        Task<IRespons> HendlerAsync(IRequest request, CancellationToken cancellationToken = default);
+        Task HandlerAsync(IRequest request, CancellationToken cancellationToken = default);
     }
 
-    public interface IRequestHendler<in IRequestFirst, in IRequestSecond, IRespons>
+    public interface IRequestHandler<in IRequest, IRespons>
     {
-        Task<IRespons> HendlerAsync(IRequestFirst requestFirst, IRequestSecond requestSecond, CancellationToken cancellationToken = default);
+        Task<IRespons> HandlerAsync(IRequest request, CancellationToken cancellationToken = default);
+    }
+
+    public interface IRequestHandler<in IRequestFirst, in IRequestSecond, IRespons>
+    {
+        Task<IRespons> HandlerAsync(IRequestFirst requestFirst, IRequestSecond requestSecond, CancellationToken cancellationToken = default);
     }
 }

@@ -22,7 +22,7 @@ namespace ConferenceRoomBooking.Api.Controllers
 
         //// GET api/<ConferenceRoomsController>/5
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AvailableConferenceRoomRespons>>> GetAvailableRooms([FromServices] IRequestHendler<GetAvailableConferenceRoomsQuery, IEnumerable<AvailableConferenceRoomRespons>> requestHendler,
+        public async Task<ActionResult<IEnumerable<AvailableConferenceRoomRespons>>> GetAvailableRooms([FromServices] IRequestHandler<GetAvailableConferenceRoomsQuery, IEnumerable<AvailableConferenceRoomRespons>> requestHendler,
             [FromBody] AvailableConferenceRoomRequest availableConferenceRoom)
         {
             var query = new GetAvailableConferenceRoomsQuery
@@ -32,12 +32,12 @@ namespace ConferenceRoomBooking.Api.Controllers
                 Capacity = availableConferenceRoom.Capacity
             };
 
-            return Ok(await requestHendler.HendlerAsync(query));
+            return Ok(await requestHendler.HandlerAsync(query));
         }
 
         // POST api/<ConferenceRoomsController>
         [HttpPost]
-        public async Task<IActionResult> AddConferenceRoom([FromServices] IRequestHendler<AddConferenceRoomCommand> addConferenceRoomCommand, 
+        public async Task<IActionResult> AddConferenceRoom([FromServices] IRequestHandler<AddConferenceRoomCommand> addConferenceRoomCommand, 
             [FromBody] AddConferenceRoomRequest conferenceRoomRequest)
         {
             var conferenceRoomCommand = new AddConferenceRoomCommand
@@ -47,17 +47,17 @@ namespace ConferenceRoomBooking.Api.Controllers
                 BasePrice = conferenceRoomRequest.BasePrice
             };
 
-            await addConferenceRoomCommand.HendlerAsync(conferenceRoomCommand);
+            await addConferenceRoomCommand.HandlerAsync(conferenceRoomCommand);
 
             return Ok(200);
         }
 
         // PUT api/<ConferenceRoomsController>/5
         [HttpPut]
-        public async Task<IActionResult> UpsertConferenceRoom([FromServices] IRequestHendler<UpsertConferenceRoomCommand> upsertConferenceRoomCommand, 
+        public async Task<IActionResult> UpsertConferenceRoom([FromServices] IRequestHandler<UpsertConferenceRoomCommand> upsertConferenceRoomCommand, 
             [FromBody] UpsertConferenceRoomRequest upsertConferenceRoomRequest)
         {
-            await upsertConferenceRoomCommand.HendlerAsync(new UpsertConferenceRoomCommand
+            await upsertConferenceRoomCommand.HandlerAsync(new UpsertConferenceRoomCommand
             {
                 Id = upsertConferenceRoomRequest.Id,
                 Name = upsertConferenceRoomRequest.Name,
@@ -70,10 +70,10 @@ namespace ConferenceRoomBooking.Api.Controllers
 
         // DELETE api/<ConferenceRoomsController>/5
         [HttpDelete]
-        public async Task<IActionResult> DeleteConferenceRoom([FromServices] IRequestHendler<DeleteConferenceRoomCommand> deleteConferenceRoomCommand,
+        public async Task<IActionResult> DeleteConferenceRoom([FromServices] IRequestHandler<DeleteConferenceRoomCommand> deleteConferenceRoomCommand,
             Guid idRequest)
         {
-            await deleteConferenceRoomCommand.HendlerAsync(new DeleteConferenceRoomCommand
+            await deleteConferenceRoomCommand.HandlerAsync(new DeleteConferenceRoomCommand
             {
                 Id = idRequest
             });

@@ -1,38 +1,49 @@
 ﻿using ConferenceRoomBooking.Application.Interfaces.Repositories;
 using ConferenceRoomBooking.Application.Interfaces.Sevices;
+using ConferenceRoomBooking.Application.Queries.Calculation;
 using ConferenceRoomBooking.Application.Queries.ConferenceRoom;
 using ConferenceRoomBooking.Application.Queries.OptionalService;
 using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Commands.Booking
 {
-    public class AddBookingHandler : IRequestHendler<AddBookingCommand>
+    public class AddBookingHandler : IRequestHandler<AddBookingCommand>
     {
         private readonly IBookingRepository _repository;
-        private readonly IRequestHendler<GetByIdConferenceRoomsQuery, ConferenceRoomEntity> _getRoomHandler;
-        private readonly IRequestHendler<GetCollectionOptionalServiceQuery, IEnumerable<OptionalServiceEntity>> _getServicesHandler;
+        private readonly IRequestHandler<GetByIdConferenceRoomsQuery, ConferenceRoomEntity> _getRoomHandler;
+        private readonly IRequestHandler<GetCollectionOptionalServiceQuery, IEnumerable<OptionalServiceEntity>> _getServicesHandler;
+        private readonly IRequestHandler<CalculateRentPriceQuery, decimal> _requestCalculateRentHendler;
 
         public AddBookingHandler(IBookingRepository repository,
-            IRequestHendler<GetByIdConferenceRoomsQuery, ConferenceRoomEntity> getRoomHandler,
-            IRequestHendler<GetCollectionOptionalServiceQuery, IEnumerable<OptionalServiceEntity>> getServicesHandler)
+            IRequestHandler<GetByIdConferenceRoomsQuery, ConferenceRoomEntity> getRoomHandler,
+            IRequestHandler<GetCollectionOptionalServiceQuery, IEnumerable<OptionalServiceEntity>> getServicesHandler,
+            IRequestHandler<CalculateRentPriceQuery, decimal> requestCalculateRentHendler)
         {
             _repository = repository;
             _getRoomHandler = getRoomHandler;
             _getServicesHandler = getServicesHandler;
+            _requestCalculateRentHendler = requestCalculateRentHendler;
         }
-        public async Task HendlerAsync(AddBookingCommand request, CancellationToken cancellationToken = default)
+        public async Task HandlerAsync(AddBookingCommand request, CancellationToken cancellationToken = default)
         {
-            var room = await _getRoomHandler.HendlerAsync(new GetByIdConferenceRoomsQuery
+            var room = await _getRoomHandler.HandlerAsync(new GetByIdConferenceRoomsQuery
             {
                 Id = request.ConferenceRoomId
             }, cancellationToken);
 
-            var services = await _getServicesHandler.HendlerAsync(new GetCollectionOptionalServiceQuery
+            var services = await _getServicesHandler.HandlerAsync(new GetCollectionOptionalServiceQuery
             {
                 Ids = request.ServiceIds
             }, cancellationToken);
 
-            var totalPrice = room.BaseHourPrice * (decimal)request.DurationHours.TotalHours + services.Sum(x => x.ServicePrice);
+            var rentPrice = await _requestCalculateRentHendler.HandlerAsync(new CalculateRentPriceQuery
+            {
+                StartAt = request.StartAt,
+                BaseHourPrice = room.BaseHourPrice,
+                DurationHours = request.DurationHours
+            }, cancellationToken);
+
+            var totalPrice = rentPrice + services.Sum(x => x.ServicePrice);
 
             await _repository.AddAsync(new BookingEntity
             {

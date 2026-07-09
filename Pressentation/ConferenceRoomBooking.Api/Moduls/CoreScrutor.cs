@@ -9,16 +9,16 @@ namespace ConferenceRoomBooking.Api.Moduls
         {
             services.Scan(scan => scan
             .FromApplicationDependencies()
-            .AddClasses(classes => classes.AssignableTo(typeof(IResponsHendler<>)))
+            .AddClasses(classes => classes.AssignableTo(typeof(IResponsHandler<>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
-            .AddClasses(classes => classes.AssignableTo(typeof(IRequestHendler<>)))
+            .AddClasses(classes => classes.AssignableTo(typeof(IRequestHandler<>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
-            .AddClasses(classes => classes.AssignableTo(typeof(IRequestHendler<,>)))
+            .AddClasses(classes => classes.AssignableTo(typeof(IRequestHandler<,>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
-            .AddClasses(classes => classes.AssignableTo(typeof(IRequestHendler<,,>)))
+            .AddClasses(classes => classes.AssignableTo(typeof(IRequestHandler<,,>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             .AddClasses(classes => classes.AssignableTo(typeof(IBookingRepository)))
@@ -28,6 +28,9 @@ namespace ConferenceRoomBooking.Api.Moduls
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             .AddClasses(classes => classes.AssignableTo(typeof(IOptionalServiceRepository)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            .AddClasses(classes => classes.AssignableTo(typeof(ICalculateRentRepository)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 

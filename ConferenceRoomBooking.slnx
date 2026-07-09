@@ -5,6 +5,7 @@
   </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/ConferenceRoomBooking.Data/ConferenceRoomBooking.Data.csproj" />
+    <Project Path="Infrastructure/ConferenceRoomBooking.JSON/ConferenceRoomBooking.JSON.csproj" Id="20fe7fdc-0f84-4c5a-bc25-47c8b0fb01df" />
   </Folder>
   <Folder Name="/Pressentation/">
     <Project Path="Pressentation/ConferenceRoomBooking.Api/ConferenceRoomBooking.Api.csproj" />

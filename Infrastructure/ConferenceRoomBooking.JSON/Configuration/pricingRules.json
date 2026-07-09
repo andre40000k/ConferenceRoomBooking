@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Morning",
+    "Start": "06:00",
+    "End": "09:00",
+    "Modifier": -10
+  },
+  {
+    "Name": "Standard",
+    "Start": "09:00",
+    "End": "12:00",
+    "Modifier": 0
+  },
+  {
+    "Name": "Peak",
+    "Start": "12:00",
+    "End": "14:00",
+    "Modifier": 15
+  },
+  {
+    "Name": "Standard",
+    "Start": "14:00",
+    "End": "18:00",
+    "Modifier": 0
+  },
+  {
+    "Name": "Evening",
+    "Start": "18:00",
+    "End": "23:00",
+    "Modifier": -20
+  }
+]

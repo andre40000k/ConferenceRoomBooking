@@ -26,7 +26,7 @@ namespace ConferenceRoomBooking.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeSpan>("DurationHours")
                         .HasColumnType("time");
 
                     b.Property<DateTime>("EndAt")

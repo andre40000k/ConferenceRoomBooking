@@ -3,7 +3,7 @@ using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 {
-    public interface IOptionalServiceRepository : IBaseRepository
+    public interface IOptionalServiceRepository
     {
         Task AddAsync(
         OptionalServiceEntity optionalServiceEntity,

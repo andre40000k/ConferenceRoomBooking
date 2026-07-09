@@ -4,7 +4,7 @@ using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Queries.OptionalService
 {
-    public class GetCollectionOptionalServiceHandler : IRequestHendler<GetCollectionOptionalServiceQuery, IEnumerable<OptionalServiceEntity>>
+    public class GetCollectionOptionalServiceHandler : IRequestHandler<GetCollectionOptionalServiceQuery, IEnumerable<OptionalServiceEntity>>
     {
         private readonly IOptionalServiceRepository _repository;
         public GetCollectionOptionalServiceHandler(IOptionalServiceRepository repository)
@@ -12,7 +12,7 @@ namespace ConferenceRoomBooking.Application.Queries.OptionalService
             _repository = repository;
         }
 
-        public async Task<IEnumerable<OptionalServiceEntity>> HendlerAsync(GetCollectionOptionalServiceQuery request, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<OptionalServiceEntity>> HandlerAsync(GetCollectionOptionalServiceQuery request, CancellationToken cancellationToken = default)
         {
             return await _repository.GetCollectionSirviceAsync(request, cancellationToken);
         }

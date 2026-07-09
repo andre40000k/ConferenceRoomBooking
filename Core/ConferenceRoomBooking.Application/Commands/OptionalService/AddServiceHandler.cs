@@ -4,14 +4,14 @@ using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Commands.Service
 {
-    public class AddServiceHandler : IRequestHendler<UpsertServiceCommand>
+    public class AddServiceHandler : IRequestHandler<UpsertServiceCommand>
     {
         private readonly IOptionalServiceRepository _repository;
         public AddServiceHandler(IOptionalServiceRepository repository) 
         {
             _repository = repository;
         }
-        public async Task HendlerAsync(UpsertServiceCommand request, CancellationToken cancellationToken = default)
+        public async Task HandlerAsync(UpsertServiceCommand request, CancellationToken cancellationToken = default)
         {
             await _repository.AddAsync(new OptionalServiceEntity
             {

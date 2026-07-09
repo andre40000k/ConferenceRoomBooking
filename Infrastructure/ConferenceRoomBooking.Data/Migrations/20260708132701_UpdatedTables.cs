@@ -36,7 +36,7 @@ namespace ConferenceRoomBooking.Data.Migrations
                 table: "BookingEntity");
 
             migrationBuilder.RenameColumn(
-                name: "Duration",
+                name: "DurationHours",
                 table: "BookingEntity",
                 newName: "DurationHours");
 
@@ -151,7 +151,7 @@ namespace ConferenceRoomBooking.Data.Migrations
             migrationBuilder.RenameColumn(
                 name: "DurationHours",
                 table: "BookingEntity",
-                newName: "Duration");
+                newName: "DurationHours");
 
             migrationBuilder.AddColumn<Guid>(
                 name: "BookingId",

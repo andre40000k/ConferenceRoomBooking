@@ -2,7 +2,7 @@
 
 namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 {
-    public interface IBookingRepository : IBaseRepository
+    public interface IBookingRepository
     {
         Task AddAsync(
         BookingEntity bookingEntity,

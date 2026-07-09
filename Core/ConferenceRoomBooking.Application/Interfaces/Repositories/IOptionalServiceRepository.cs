@@ -1,11 +1,16 @@
-﻿using ConferenceRoomBooking.Domain.Entities;
+﻿using ConferenceRoomBooking.Application.Queries.OptionalService;
+using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 {
-    public interface IOptionalServiceRepository
+    public interface IOptionalServiceRepository : IBaseRepository
     {
         Task AddAsync(
         OptionalServiceEntity optionalServiceEntity,
         CancellationToken cancellationToken);
+
+        Task<IEnumerable<OptionalServiceEntity>> GetCollectionSirviceAsync(
+        GetCollectionOptionalServiceQuery query,
+        CancellationToken cancellationToken = default);
     }
 }

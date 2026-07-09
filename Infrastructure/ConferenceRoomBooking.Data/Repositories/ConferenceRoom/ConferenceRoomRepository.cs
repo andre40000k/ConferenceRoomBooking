@@ -48,6 +48,17 @@ namespace ConferenceRoomBooking.Data.Repositories.ConferenceRoom
             return rooms;
         }
 
+        public async Task<ConferenceRoomEntity> GetByIdRoomsAsync(Guid Id, CancellationToken cancellationToken = default)
+        {
+            var room = await _db.ConferenceRooms
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == Id, cancellationToken);
+
+            if (room is null)
+                throw new InvalidOperationException($"Conference room with Id '{Id}' not found.");
+            return room;
+        }
+
         public async Task UpdateAsync(Guid id, string name, int capacity, decimal basePrice, CancellationToken cancellationToken)
         {
             await _db.ConferenceRooms

@@ -3,7 +3,7 @@ using ConferenceRoomBooking.Domain.Entities;
 
 namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 {
-    public interface IConferenceRoomRepository
+    public interface IConferenceRoomRepository : IBaseRepository
     {
         Task AddAsync(
         ConferenceRoomEntity conferenceRoomEntity,
@@ -18,6 +18,10 @@ namespace ConferenceRoomBooking.Application.Interfaces.Repositories
 
         Task DeletedAsync(Guid id,
             CancellationToken cancellationToken);
+
+        Task<ConferenceRoomEntity> GetByIdRoomsAsync(
+        Guid Id,
+        CancellationToken cancellationToken = default);
 
         Task<IEnumerable<AvailableConferenceRoomRespons>> GetAvailableRoomsAsync(
         DateTime startDateTime,

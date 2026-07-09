@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ConferenceRoomBooking.Application.Commands.Booking;
+using ConferenceRoomBooking.Application.DTOs.Requests.Booking;
+using ConferenceRoomBooking.Application.Interfaces.Sevices;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,11 +25,20 @@ namespace ConferenceRoomBooking.Api.Controllers
         //    return "value";
         //}
 
-        //// POST api/<BookingsController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        // POST api/<BookingsController>
+        [HttpPost]
+        public async Task<IActionResult> AddBooking([FromServices] IRequestHendler<AddBookingCommand> requestHendler,
+            [FromBody] AddBookingRequest addBookingRequest)
+        {
+            await requestHendler.HendlerAsync(new AddBookingCommand
+            {
+                ConferenceRoomId = addBookingRequest.ConferenceRoomId,
+                StartAt = addBookingRequest.StartAt,
+                DurationHours = addBookingRequest.DurationHours,
+                ServiceIds = addBookingRequest.ServiceIds
+            });
+            return Ok(200);
+        }
 
         //// PUT api/<BookingsController>/5
         //[HttpPut("{id}")]

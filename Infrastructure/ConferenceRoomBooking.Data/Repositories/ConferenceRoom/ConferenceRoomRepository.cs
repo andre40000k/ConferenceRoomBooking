@@ -57,6 +57,8 @@ namespace ConferenceRoomBooking.Data.Repositories.ConferenceRoom
         {
             var room = await _db.ConferenceRooms
                 .AsNoTracking()
+                .Include(r => r.BookingEntitys)
+                    .ThenInclude(b => b.BookingServices)
                 .FirstOrDefaultAsync(x => x.Id == Id, cancellationToken);
 
             if (room is null)

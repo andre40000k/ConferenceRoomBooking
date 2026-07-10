@@ -17,7 +17,7 @@ Backend-сервис для управления бронью конференц
 - Pressentation/ConferenceRoomBooking.Api — HTTP API, контроллеры и точка входа
 
 Архитектурные решения
-- Подход слоёв (Onion/Clean): Domain не зависит от инфраструктуры; Application orchestrates use-cases; Infrastructure реализует репозитории и DbContext; Presentation — API.
+- Подход слоёв (Onion/Clean): Domain не зависит от инфраструктуры; Application бизнес логика; Infrastructure реализует репозитории и DbContext; Presentation — API.
 - CQRS-паттерн: команды и запросы реализованы в Application (обработчики команд/запросов).
 - Внедрение зависимостей через DI (Microsoft.Extensions.DependencyInjection) — репозитории и сервисы регистрируются в API проекте.
 - Персистенция: EF Core (конфигурация через IEntityTypeConfiguration); для разработки используется sqlite, в продакшн можно переключить на SQL Server/Postgres через connection string.
